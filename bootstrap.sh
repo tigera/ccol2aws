@@ -4,7 +4,12 @@ echo If difficulty is encountered, please let us know in the academy channel on 
 
 [[ "${AWS_EXECUTION_ENV}" != "CloudShell" ]] && echo Please use AWS CloudShell. && exit 1
 
+[[ ! -d "~/.local/bin" ]] && mkdir -p ~/.local/bin
+
 echo Downloading lab assets.
+
+echo Downloading calicoctl
+curl -Lo ~/.local/bin/calicoctl https://github.com/projectcalico/calicoctl/releases/download/v3.17.1/calicoctl-linux-amd64
 echo Downloading Kubectl
 curl -Lo ~/.local/bin/kubectl https://dl.k8s.io/release/v1.19.0/bin/linux/amd64/kubectl
 echo Downloading kOps
