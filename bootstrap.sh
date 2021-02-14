@@ -5,9 +5,9 @@ echo If difficulty is encountered, please let us know in the academy channel on 
 [[ "${AWS_EXECUTION_ENV}" != "CloudShell" ]] && { echo "Please use AWS CloudShell."; exit 1; }
 
 [[ ! -d "`echo ~`/.local/bin" ]] && mkdir -p "`echo ~`/.local/bin"
+[[ ! -d "`echo ~`/.ssh/id_rsa" ]] && (echo "Generating new ssh-keypair." && ssh-keygen -b 2048 -t rsa -f "`echo ~`/.ssh/id_rsa" -q -N "")
 
 echo Downloading lab assets.
-
 calicoctl -h > /dev/null || (echo "Downloading calicoctl"; curl -Lo "`echo ~`/.local/bin/calicoctl" https://github.com/projectcalico/calicoctl/releases/download/v3.17.1/calicoctl-linux-amd64 )
 kubectl -h > /dev/null || (echo "Downloading kubectl"; curl -Lo "`echo ~`/.local/bin/kubectl" https://dl.k8s.io/release/v1.19.0/bin/linux/amd64/kubectl )
 kops -h > /dev/null || (echo "Downloading kOps"; curl -Lo "`echo ~`/.local/bin/kops" https://github.com/kubernetes/kops/releases/download/v1.19.0/kops-linux-amd64 )
@@ -22,4 +22,5 @@ kops -h > /dev/null || { echo "Error downloading kOps. Please try again."; rm -f
 verify > /dev/null ||  { echo "Error downloading verify. Please try again."; rm -f "`echo ~`/.local/bin/verify"; exit 1; }
 eksctl -h > /dev/null || { echo "Error downloading eksctl. Please try again."; rm -f "`echo ~`/.local/bin/eksctl"; exit 1; }
 echo Installation complete.
+
 exit 0
