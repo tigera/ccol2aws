@@ -5,7 +5,7 @@ echo If difficulty is encountered, please let us know in the academy channel on 
 [[ "${AWS_EXECUTION_ENV}" != "CloudShell" ]] && { echo "Please use AWS CloudShell."; exit 1; }
 
 [[ ! -d "`echo ~`/.local/bin" ]] && mkdir -p "`echo ~`/.local/bin"
-[[ ! -d "`echo ~`/.ssh/id_rsa" ]] && (echo "Generating new ssh-keypair." && ssh-keygen -b 2048 -t rsa -f "`echo ~`/.ssh/id_rsa" -q -N "")
+[[ ! -f "`echo ~`/.ssh/id_rsa" ]] && (echo "Generating new ssh-keypair." && ssh-keygen -b 2048 -t rsa -f "`echo ~`/.ssh/id_rsa" -q -N "")
 
 echo Downloading lab assets.
 calicoctl -h > /dev/null || (echo "Downloading calicoctl"; curl -Lo "`echo ~`/.local/bin/calicoctl" https://github.com/projectcalico/calicoctl/releases/download/v3.17.1/calicoctl-linux-amd64 )
