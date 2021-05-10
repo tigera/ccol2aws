@@ -1,0 +1,23 @@
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: frontend-allow
+spec:
+  order: 10
+  selector: app == 'frontend'
+  ingress:
+   - action: Allow
+     http:
+       paths:
+         - exact: "/"
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: frontend-deny
+spec:
+  order: 20
+  selector: app == 'frontend'
+  types:
+  - Ingress
