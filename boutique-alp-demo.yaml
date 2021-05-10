@@ -11,6 +11,7 @@ spec:
      http:
        paths:
          - exact: "/"
+         - prefix: "/static"
 ---
 apiVersion: projectcalico.org/v3
 kind: GlobalNetworkPolicy
